@@ -73,7 +73,7 @@ class NewsCorpusGenerator(object):
     def generate_corpus(self,articles):
         
         # TODO parallelize extraction process
-        print 'Extracting  content from links...'
+        print('Extracting  content from links...')
 
         for article in articles:
             category = article[0]
@@ -102,7 +102,7 @@ class NewsCorpusGenerator(object):
 
     def _save_article(self,clean_article):
 
-        print "Saving article %s..." %(clean_article['title'])
+        print("Saving article %s..." %(clean_article['title']))
 
         if self.datastore_type == 'file':
             self._save_flat_file(clean_article)
@@ -169,10 +169,10 @@ class NewsCorpusGenerator(object):
     def _set_up_db(self,db):
 
         if os.path.exists(db):
-            print 'Database exists, assume schema does, too.'
+            print('Database exists, assume schema does, too.')
         else:
-            print 'Need to create schema'
-            print 'Creating schema...'
+            print('Need to create schema')
+            print('Creating schema...')
             conn = sqlite3.connect(db)
             cur = conn.cursor()
             cur.execute("create table articles (Id INTEGER PRIMARY KEY,category, title,body)")
@@ -189,7 +189,7 @@ class NewsCorpusGenerator(object):
                     VALUES(?, ?, ?,?)",(None,clean_article['category'],clean_article['title'],clean_article['body']))
             except sqlite3.IntegrityError:
                 self.stats['not_insert_db'] += 1
-                print 'Record already inserted with title %s ' %(clean_article['title'])
+                print('Record already inserted with title %s ' %(clean_article['title']))
 
     def get_stats(self):
         return self.stats
