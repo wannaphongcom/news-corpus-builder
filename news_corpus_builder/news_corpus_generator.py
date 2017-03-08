@@ -1,4 +1,4 @@
-from goose import Goose
+from readability import Document as Goose
 import feedparser
 from pprint import pprint
 import sys
